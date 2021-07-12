@@ -71,7 +71,7 @@ export class WebAuthenticator implements Authenticator {
 
             // Store the app location and other state if required
             HtmlStorageHelper.appState = {
-                hash: location.hash,
+                hash: location.hash || '#',
             };
 
             // Then do the redirect
@@ -111,6 +111,7 @@ export class WebAuthenticator implements Authenticator {
 
                 // Remove session storage and the code / state details from the browser and back navigation
                 HtmlStorageHelper.removeAppState();
+                console.log(`*** Setting location to ${appLocation}`)
                 history.replaceState({}, document.title, appLocation);
             }
 
